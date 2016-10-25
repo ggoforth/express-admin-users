@@ -3,12 +3,12 @@
 var express = require('express');
 var router = express.Router();
 
-const Account = require('../modules/account');
+const Employee = require('../modules/employee');
 
 /* GET /new-account */
 router.get('/', function(req, res, next) {
   //Show a new account form
-  res.render('new-account', {err: null});
+  res.render('new-employee', {err: null});
 });
 
 /**
@@ -16,16 +16,14 @@ router.get('/', function(req, res, next) {
  */
 router.post('/', (req, res, next) => {
   //creating a new account
-  Account.passwordsMatch(req.body)
-    .then(Account.create)
-    .then(account => {
-      res.json({account}); 
+  Employee.create(req.body)
+    .then(employee => {
+      //TODO: redirect somewhere
+      res.json({employee});
     })
     .catch(err => {
       res.render('new-account', {err: err});
     });
 });
-
-
 
 module.exports = router;

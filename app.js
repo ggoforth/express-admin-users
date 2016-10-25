@@ -27,7 +27,9 @@ let session = require('express-session');
 
 //routes
 var routes = require('./routes/index');
-var newAccount = require('./routes/new-account');
+let newAccount = require('./routes/new-account');
+let login = require('./routes/login');
+let newEmployee = require('./routes/new-employee');
 
 var app = express();
 // view engine setup
@@ -85,6 +87,8 @@ passport.deserializeUser((user, next) => {
 
 app.use('/', routes);
 app.use('/new-account', newAccount);
+app.use('/login', login);
+app.use('/new-employee', newEmployee);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

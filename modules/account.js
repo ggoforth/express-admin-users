@@ -1,7 +1,23 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-  Account = mongoose.model('Account');
+  Account = mongoose.model('Account'),
+  Promise = require('bluebird');
+
+/**
+ * Do the passwords match.
+ * 
+ * @param data
+ */
+function passwordsMatch(data) {
+  return new Promise((resolve, reject) => {
+    if (data.password !== data.passwordConfirm) {
+      reject(new Error('Sorry, but the passwords did not match'));
+    } else {
+      resolve(data);
+    }
+  });  
+}
 
 /**
  * Create an Account.
@@ -34,5 +50,6 @@ module.exports = {
   create,
   read,
   update,
-  del
+  del,
+  passwordsMatch
 };
