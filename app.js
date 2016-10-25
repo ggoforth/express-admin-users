@@ -75,6 +75,14 @@ passport.use(new LocalStrategy({
     .catch(next);
 }));
 
+passport.serializeUser((user, next) => {
+  next(null, user);
+});
+
+passport.deserializeUser((user, next) => {
+  next(null, user);
+});
+
 app.use('/', routes);
 app.use('/users', users);
 
