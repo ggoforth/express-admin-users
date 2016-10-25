@@ -1,3 +1,21 @@
+'use strict';
+
+let mongoose = require('mongoose'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local'),
+  bcrypt = require('bcrypt'),
+  Promise = require('bluebird');
+
+//database connection
+mongoose.connect(process.env.MONGO_URI);
+let db = mongoose.connection;
+db.on('open', () => console.log('Database Connected'));
+db.on('error', () => console.error('Error connecting to database'));
+
+//include models
+require('./models/account');
+require('./models/employee');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,6 +23,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
