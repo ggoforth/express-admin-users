@@ -9,6 +9,7 @@ let mongoose = require('mongoose'),
 //database connection
 mongoose.connect(process.env.MONGO_URI);
 let db = mongoose.connection;
+mongoose.Promise = Promise;
 db.on('open', () => console.log('Database Connected'));
 db.on('error', () => console.error('Error connecting to database'));
 
@@ -22,19 +23,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+let session = require('express-session');
+
 
 //routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//enable Sessions
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true 
+}));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
