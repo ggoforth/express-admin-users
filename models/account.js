@@ -16,7 +16,7 @@ AccountSchema.pre('save', function (next) {
     next();
   } else {
     //it is modified
-    bcrypt.genSaltAsync(100)
+    bcrypt.genSaltAsync(10)
       .then(salt => {
         bcrypt.hashAsync(this.password, salt)
           .then(hash => {
