@@ -8,7 +8,7 @@ const Employee = require('../modules/employee');
 /* GET /new-account */
 router.get('/', function(req, res, next) {
   //Show a new account form
-  res.render('new-employee', {err: null});
+  res.render('new-employee', {err: null, employee: null});
 });
 
 /**
@@ -18,8 +18,7 @@ router.post('/', (req, res, next) => {
   //creating a new account
   Employee.create(req.body)
     .then(employee => {
-      //TODO: redirect somewhere
-      res.json({employee});
+      res.redirect('/employee-list');
     })
     .catch(err => {
       res.render('new-account', {err: err});

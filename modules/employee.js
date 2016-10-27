@@ -18,8 +18,15 @@ function create(data) {
     });
 }
 
-function read() {
-
+/**
+ * Find the employees.
+ * 
+ * @param query
+ * @returns {*|Query|T}
+ */
+function read(query) {
+  query = query || {};
+  return Employee.find(query); 
 }
 
 function update() {

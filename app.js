@@ -25,12 +25,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 let session = require('express-session');
 
-//routes
-var routes = require('./routes/index');
-let newAccount = require('./routes/new-account');
-let login = require('./routes/login');
-let newEmployee = require('./routes/new-employee');
-
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -85,10 +79,11 @@ passport.deserializeUser((user, next) => {
   next(null, user);
 });
 
-app.use('/', routes);
-app.use('/new-account', newAccount);
-app.use('/login', login);
-app.use('/new-employee', newEmployee);
+app.use('/', require('./routes/index'));
+app.use('/employee-list', require('./routes/employee-list'));
+app.use('/new-account', require('./routes/new-account'));
+app.use('/login', require('./routes/login'));
+app.use('/new-employee', require('./routes/new-employee'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -97,7 +92,7 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handlers
+
 
 // development error handler
 // will print stacktrace

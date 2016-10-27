@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel='stylesheet'
+          href='/stylesheets/style.css'/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Hire Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i < employees.length; i++) { %>
+                <tr>
+                    <td><%= employees[i].name%></td>
+                    <td><%= employees[i].email%></td>
+                    <td><%= employees[i].hireDateFormat%></td>
+                    <td>
+                        <a href="/employee-list/<%= employees[i]._id %>">Edit</a>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
