@@ -6,6 +6,9 @@ const express = require('express'),
   _ = require('lodash'),
   Employee = require('../modules/employee');
 
+/**
+ * Disallow access if not logged in.
+ */
 router.use((req, res, next) => {
   if (!req.user) {
     res.redirect('/login');
