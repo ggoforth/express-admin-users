@@ -27,9 +27,11 @@
                 <tr>
                     <td><%= employees[i].name%></td>
                     <td><%= employees[i].email%></td>
-                    <td><%= employees[i].hireDateFormat%></td>
+                    <td title="<%= employees[i].hire_date%>"><%= employees[i].hireDateFormat%></td>
                     <td>
+                        <% if (user) { %>
                         <a href="/employee-list/<%= employees[i]._id %>">Edit</a>
+                        <% } %>
                     </td>
                 </tr>
                 <% } %>
